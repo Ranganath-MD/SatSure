@@ -1,0 +1,17 @@
+.App {
+  max-width: 350px;
+  margin: 0 auto;
+  margin-top: 5vh;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading p {
+  font-weight: bold;
+}
+
+
