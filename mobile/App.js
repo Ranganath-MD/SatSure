@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Provider } from "./context";
+import { Home } from "./Home";
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>SatSure...</Text>
+    <>
       <StatusBar style="auto" />
-    </View>
+      <Provider>
+        <Home />
+      </Provider>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
