@@ -8,7 +8,7 @@ const data = {
   khasra: null,
   mandal: null,
   khata: null,
-  servey: null,
+  survey: null,
 };
 
 const selectedStates = {
@@ -21,7 +21,7 @@ const selectedStates = {
   selectedKhasra: null,
   selectedMandal: null,
   selectedKhata: null,
-  selectedServey: null,
+  selectedSurvey: null,
 };
 
 export const initialState = {
@@ -64,7 +64,6 @@ export const reducer = (state, action) => {
         selectedDist: state.selectedDist,
         selectedState: state.selectedState,
       };
-      console.log({ state });
       return state;
 
     case "GET_VILLAGE_DATA":
@@ -105,11 +104,11 @@ export const reducer = (state, action) => {
       };
       return state;
 
-    case "GET_SERVEY_DATA":
+    case "GET_SURVEY_DATA":
       state = {
         ...state,
-        servey: payload,
-        selectedServey: "",
+        survey: payload,
+        selectedSurvey: "",
       };
       return state;
 
@@ -139,7 +138,6 @@ export const reducer = (state, action) => {
       return { ...state };
 
     case "SET_VALUES":
-      console.log({ payload })
       return { ...state, [payload.key]: payload.value };
 
     default:

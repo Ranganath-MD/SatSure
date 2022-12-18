@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { createRef, useEffect, useMemo, useRef } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   KeyboardAvoidingView,
@@ -13,12 +13,15 @@ import { Button } from "./components/Button";
 import { request } from "./utils/axios";
 import { useGlobalContext } from "./context";
 import { useSelect } from "./hooks/useSelect";
+import { useData } from "./hooks/useData";
 
 const region_id_state = "105677d6-ae75-4fae-b71b-0c6a53f599c7";
 
 export const Home = () => {
-  const { state, dispatch } = useGlobalContext();
+  const { dispatch } = useGlobalContext();
   const { current, handleSelect, setCurrent } = useSelect();
+  const { data } = useData();
+  const currentRef = useRef(data?.map(() => createRef()))
 
   const fetchFirstDropdown = async () => {
     const response = await request.get(`/${region_id_state}`);
@@ -38,8 +41,18 @@ export const Home = () => {
     setCurrent("");
   };
 
+  const handleClear = (_level, index) => {
+    for (let i = index + 1; i < 10; i++) {
+      if (currentRef?.current[i]?.current === null) continue;
+      else {
+        currentRef?.current[i]?.clear();
+      };
+    }
+  }
+
   const options = {
     onSelectItem: onSelectItem,
+    onClear: handleClear,
   };
 
   return (
@@ -60,67 +73,18 @@ export const Home = () => {
               <Text style={styles.text}>FILTERS</Text>
               <Button title="CLEAR ALL" onPress={handleClearAll} />
             </View>
-            <AutoComplete
-              {...options}
-              value={state.selectedState}
-              data={state.states}
-              visible={true}
-            />
-            <AutoComplete
-              {...options}
-              value={state.selectedDist}
-              data={state.district}
-              visible={state?.district !== null}
-            />
-            <AutoComplete
-              {...options}
-              value={state.selectedTehsil}
-              data={state.tehsil}
-              visible={state?.tehsil !== null}
-            />
-            <AutoComplete
-              {...options}
-              value={state.selectedMandal}
-              data={state.mandal}
-              visible={state?.mandal !== null}
-            />
-            <AutoComplete
-              {...options}
-              value={state.selectedVillage}
-              data={state.villages}
-              visible={state?.villages !== null}
-            />
-            <AutoComplete
-              {...options}
-              value={state.selectedKhewat}
-              data={state.khewat}
-              visible={state?.khewat !== null}
-            />
-            <AutoComplete
-              {...options}
-              value={state.selectedKhata}
-              data={state.khata}
-              visible={state?.khata !== null}
-            />
-            <AutoComplete
-              {...options}
-              value={state.selectedServey}
-              data={state.servey}
-              visible={state?.servey !== null}
-            />
-            <AutoComplete
-              {...options}
-              value={state.selectedMurabba}
-              data={state.murabba}
-              visible={state?.murabba !== null}
-            />
-            <AutoComplete
-              {...options}
-              value={state.selectedKhasra}
-              data={state.khasra}
-              visible={state?.khasra !== null}
-            />
+          
+            {data?.map((item, i) => {
+              const { key, ...rest } = item;
+              const props = { ...options, ...rest };
+              return (
+                <AutoComplete ref={(el) => currentRef.current[i] = el} key={key} {...props} />
+              );
+            })}
+
             <Button title="Search" primary disabled={!current.access} />
+
+
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -136,7 +100,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   text: {
-    fontSize: 15
+    fontSize: 15,
   },
   // grow: { flexGrow: 0, justifyContent: "flex-end" },
   heading: {

@@ -63,7 +63,6 @@ export const reducer = (state: typeof initialState, action: Action) => {
         selectedDist: state.selectedDist,
         selectedState: state.selectedState,
       };
-      console.log({ state });
       return state;
 
     case "GET_VILLAGE_DATA":

@@ -34,8 +34,6 @@ function App() {
     getOptionLabel: (option: Region) => option?.name?.toString() || "",
   };
 
-  console.log(state.khewat)
-
   return (
     <div className="App">
       <div className="heading">

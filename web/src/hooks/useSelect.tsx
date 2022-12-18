@@ -28,16 +28,21 @@ export const useSelect = () => {
 
   const handleSelect = async (e: any, newValue: any) => {
     handleSetSelected(e.target.id, newValue);
+    if (!newValue) return;
 
-    const { data: response } = await request.get(`/${newValue.id}`);
-    const currentLevel = response.data.currentLevel;
+    try {
+      const { data: response } = await request.get(`/${newValue.id}`);
+      const currentLevel = response.data.currentLevel;
+      setCurrent({
+        level: currentLevel,
+        access: response.data.currentLevelAccess,
+      });
+  
+      dispatch({ type: actions[currentLevel], payload: response.data });
+    }catch {
+      throw new Error("Not able to fetch")
+    }
 
-    setCurrent({
-      level: currentLevel,
-      access: response.data.currentLevelAccess,
-    });
-
-    dispatch({ type: actions[currentLevel], payload: response.data });
   };
 
   return { current, handleSelect, setCurrent };
