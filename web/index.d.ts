@@ -8,7 +8,7 @@ type Types =
   | "GET_KHASRA_DATA"
   | "GET_MANDAL_DATA"
   | "GET_KHATA_DATA"
-  | "GET_SERVEY_DATA"
+  | "GET_SURVEY_DATA"
   | "CLEAR_ALL"
   | "REFRESH_STATE"
   | "SET_VALUES";

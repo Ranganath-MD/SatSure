@@ -26,6 +26,7 @@ export const AutoComplete: React.FC<IAutoCompleteProps> = ({
           size="small"
           margin="normal"
           color="success"
+          focused={!!value}
           label={placeholder}
         />
       )}

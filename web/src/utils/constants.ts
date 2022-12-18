@@ -8,7 +8,7 @@ export const selects: any = {
   Khasra: "selectedKhasra",
   Mandal: "selectedMandal",
   "Khata Number": "selectedKhata",
-  "Survey Number": "selectedServey",
+  "Survey Number": "selectedSurvey",
 };
 
 export const actions: any = {
@@ -20,5 +20,5 @@ export const actions: any = {
   Khasra: "GET_KHASRA_DATA",
   Mandal: "GET_MANDAL_DATA",
   "Khata Number": "GET_KHATA_DATA",
-  "Survey Number": "GET_SERVEY_DATA",
+  "Survey Number": "GET_SURVEY_DATA",
 };

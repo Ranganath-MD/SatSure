@@ -40,5 +40,5 @@ export const useSelect = () => {
     dispatch({ type: actions[currentLevel], payload: response.data });
   };
 
-  return { current, handleSelect };
+  return { current, handleSelect, setCurrent };
 };

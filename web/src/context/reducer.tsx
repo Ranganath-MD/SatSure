@@ -8,7 +8,7 @@ const data = {
   khasra: null,
   mandal: null,
   khata: null,
-  servey: null,
+  survey: null,
 };
 
 const selectedStates = {
@@ -21,7 +21,7 @@ const selectedStates = {
   selectedKhasra: "",
   selectedMandal: "",
   selectedKhata: "",
-  selectedServey: "",
+  selectedSurvey: "",
 };
 
 export const initialState = {
@@ -104,11 +104,11 @@ export const reducer = (state: typeof initialState, action: Action) => {
       };
       return state;
 
-    case "GET_SERVEY_DATA":
+    case "GET_SURVEY_DATA":
       state = {
         ...state,
-        servey: payload,
-        selectedServey: "",
+        survey: payload,
+        selectedSurvey: "",
       };
       return state;
 
